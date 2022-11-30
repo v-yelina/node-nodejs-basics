@@ -8,7 +8,6 @@ const dir = path.join(__dirname, "/files/fresh.txt");
 const text = "I am fresh and young";
 
 const create = async () => {
-  console.log(dir);
   fs.access(dir, fs.constants.F_OK, (err) => {
     if (err) {
       fs.appendFile(dir, text, (err) => {});
