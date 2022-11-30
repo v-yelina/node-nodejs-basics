@@ -10,7 +10,9 @@ const text = "I am fresh and young";
 const create = async () => {
   fs.access(dir, fs.constants.F_OK, (err) => {
     if (err) {
-      fs.appendFile(dir, text, (err) => {});
+      fs.appendFile(dir, text, (err) => {
+        if (err) throw new Error("FS operation failed");
+      });
     } else {
       throw new Error("FS operation failed");
     }
