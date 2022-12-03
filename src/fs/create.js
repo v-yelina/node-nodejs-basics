@@ -1,16 +1,13 @@
 import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const dir = path.join(__dirname, "/files/fresh.txt");
-const text = "I am fresh and young";
+import { getUrl } from "../getUrl.js";
 
 const create = async () => {
-  fs.access(dir, fs.constants.F_OK, (err) => {
+  const fileToWriteUrl = getUrl(import.meta.url, "files", "fresh.txt");
+  const textToWrite = "I am fresh and young";
+
+  fs.access(fileToWriteUrl, fs.constants.F_OK, (err) => {
     if (err) {
-      fs.appendFile(dir, text, (err) => {
+      fs.appendFile(fileToWriteUrl, textToWrite, (err) => {
         if (err) throw new Error("FS operation failed");
       });
     } else {

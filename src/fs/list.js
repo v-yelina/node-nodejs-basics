@@ -1,12 +1,9 @@
 import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const targetDir = path.join(__dirname, "/files");
+import { getUrl } from "../getUrl.js";
 
 const list = async () => {
+  const targetDir = getUrl(import.meta.url, "files", "");
+
   fs.readdir(targetDir, { withFileTypes: true }, (err, files) => {
     if (err) throw new Error("FS operation failed");
     else {

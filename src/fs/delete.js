@@ -1,13 +1,10 @@
 import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const fileToRemovePath = path.join(__dirname, "/files/fileToRemove.txt");
+import { getUrl } from "../getUrl.js";
 
 const remove = async () => {
-  fs.unlink(fileToRemovePath, (err) => {
+  const fileToRemoveUrl = getUrl(import.meta.url, "files", "fileToRemove.txt");
+
+  fs.unlink(fileToRemoveUrl, (err) => {
     if (err) throw new Error("FS operation failed");
   });
 };

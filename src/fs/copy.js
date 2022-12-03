@@ -1,11 +1,9 @@
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } from "url";
+import { getUrl } from "../getUrl.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const dirToCopy = path.join(__dirname, "/files/");
-const destinationDir = path.join(__dirname, "/files_copy/");
+const dirToCopy = getUrl(import.meta.url, "files", "");
+const destinationDir = getUrl(import.meta.url, "files_copy", "");
 
 const copy = async (source, destination) => {
   fs.readdir(source, { withFileTypes: true }, (err, files) => {
