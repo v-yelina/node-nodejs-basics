@@ -1,6 +1,7 @@
 import { createReadStream } from "node:fs";
 import { stdout } from "node:process";
 const { createHash } = await import("node:crypto");
+import { getUrl } from "../getUrl.js";
 
 const fileToHash = getUrl(import.meta.url, "/files", "/fileToCalculateHashFor.txt");
 
