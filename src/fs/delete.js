@@ -1,8 +1,10 @@
 import fs from "fs";
-import { getUrl } from "../getUrl.js";
+import path from "node:path";
 
 const remove = async () => {
-  const fileToRemoveUrl = getUrl(import.meta.url, "/files", "/fileToRemove.txt");
+  const fileToRemoveUrl = `${path.dirname(process.argv[1])}${path.sep}files${
+    path.sep
+  }fileToRemove.txt`;
 
   fs.unlink(fileToRemoveUrl, (err) => {
     if (err) throw new Error("FS operation failed");
