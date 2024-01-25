@@ -1,10 +1,13 @@
 import { createReadStream } from "node:fs";
-import { stdout } from "node:process";
-import { getUrl } from "../getUrl.js";
+import { stdout, argv } from "node:process";
+import path from "node:path";
 
 const read = async () => {
-  const fileToReadUrl = getUrl(import.meta.url, "/files", "/fileToRead.txt");
+  const fileToReadUrl = `${path.dirname(argv[1])}${path.sep}files${path.sep}fileToRead.txt`;
   const readable = createReadStream(fileToReadUrl);
+  readable.on("error", (err) => {
+    process.stderr.write(err.message);
+  });
   readable.pipe(stdout);
 };
 
