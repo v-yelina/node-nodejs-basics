@@ -1,8 +1,9 @@
 import fs from "fs";
-import { getUrl } from "../getUrl.js";
+import path from "node:path";
 
 const create = async () => {
-  const fileToWriteUrl = getUrl(import.meta.url, "/files", "/fresh.txt");
+  const fileToWriteUrl = `${path.dirname(process.argv[1])}${path.sep}files${path.sep}fresh.txt`;
+
   const textToWrite = "I am fresh and young";
 
   fs.access(fileToWriteUrl, fs.constants.F_OK, (err) => {
