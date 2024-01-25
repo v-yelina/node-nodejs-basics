@@ -1,6 +1,7 @@
 import { cpus } from "os";
-import { getUrl } from "../getUrl.js";
 import { Worker } from "node:worker_threads";
+import path from "node:path";
+import { argv } from "node:process";
 
 const performCalculations = async () => {
   const threadsNumber = cpus().length;
@@ -16,7 +17,7 @@ const performCalculations = async () => {
 
 function createRuns(count) {
   const promiseArray = [];
-  const workerUrl = getUrl(import.meta.url, "", "/worker.js");
+  const workerUrl = `${path.dirname(argv[1])}${path.sep}worker.js`;
   for (let i = 0; i < count; i++) {
     promiseArray.push(
       new Promise((resolve, reject) => {
