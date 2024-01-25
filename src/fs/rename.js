@@ -1,9 +1,13 @@
 import fs from "fs";
-import { getUrl } from "../getUrl.js";
+import path from "node:path";
 
 const rename = async () => {
-  const currentFileName = getUrl(import.meta.url, "/files", "/wrongFilename.txt");
-  const newFileName = getUrl(import.meta.url, "/files", "/properFilename.md");
+  const currentFileName = `${path.dirname(process.argv[1])}${path.sep}files${
+    path.sep
+  }wrongFilename.txt`;
+  const newFileName = `${path.dirname(process.argv[1])}${path.sep}files${
+    path.sep
+  }properFilename.md`;
   fs.access(currentFileName, fs.constants.F_OK, (err) => {
     if (err) {
       throw new Error("FS operation failed");
